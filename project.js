@@ -2,6 +2,10 @@ var buildings = [];
 
 var nextButton;
 
+var stars = [];
+
+var scene;
+
 //building object
 
 function building(x,y,c,w,h){
@@ -17,9 +21,24 @@ function building(x,y,c,w,h){
 	}
 };
 
+
+//star object:
+function star(x,y,c,diameter,diameter){
+	this.x = x;
+	this.y = y;
+	this.c = c;
+	this.diameter = diameter;
+	this.drawStar = function(){
+		fill(this.c);
+		ellipse(this.x,this.y,this.diameter,this.diameter);
+	}
+
+};
+
 function setup(){
 	createCanvas(1300,600);
-	background("#7DDCF3");
+
+	scene = sceneOne();
 
 //create next button
 nextButton = createButton('NEXT');
@@ -32,19 +51,17 @@ nextButton.mousePressed(changeScene);
 		"#9FA2A4", random(100,200),height*i));
 	}
 
+//for loop for stars
+	for (var i=0; i<300; i++){
+		stars.push (new star(random(0, windowWidth), random(0, windowHeight),"white",random(1,5), random(1,5)));
+	}
+
 }
 
-function draw(){
-	noStroke();
-
-//skyline
-for (var i=0; i < buildings.length; i++){
-	buildings[i].drawBuilding()
-}
-
-
+function drawJane(){
 //Jane
 //hair
+	noStroke();
 	fill("#2E0A07");
 	rect(450,105,400,600,175);
 
@@ -120,46 +137,82 @@ for (var i=0; i < buildings.length; i++){
 	ellipse(667,322,20,20);
 	ellipse(654,320,30,30);
 
+}
+
+
+function draw(){
+
+noStroke();
+
+scene;
+
+}
+
+
+//if you click next button
+function changeScene(){
+		sceneOne() == sceneTwo();
+		mouseReleased();
+
+	}
+
+
+	//scene one
+	function sceneOne(){
+	background("#7DDCF3");
+
+	//skyline
+	for (var i=0; i < buildings.length; i++){
+		buildings[i].drawBuilding()
+	}
+
+	drawJane();
+
 	textSize(30);
 	fill("#32AFDE");
 	text("Once upon a time there was a girl named Jane.", 330,40);
 
-
-//text bubble
-if(mouseIsPressed){
-	fill(255);
-	ellipse(730,350,20,20);
-	ellipse(780,320,30,30);
-	ellipse(850,275,40,40);
-	ellipse(930,210,100,100);
-	ellipse(980,240,100,100);
-	ellipse(1050,235,100,100);
-	ellipse(920,150,100,100);
-	ellipse(970,120,100,100);
-	ellipse(1030,125,100,100);
-	ellipse(1070,180,100,100);
-	ellipse(1000,180,100,100);
-
-	textSize(20);
-	fill("#9FA2A4");
-	text("Hi I'm Jane!",940,130);
-	text("I'm from San Francisco",895,160);
-	text("and I moved to New",900,190);
-	text("York City to attend", 905,220);
-	text("NYU.",975,250);
-
 	}
 
-}
+	//scene two
+	function sceneTwo(){
+		background("#292F5E");
 
-function mouseReleased(){
-	background("#7DDCF3");
+		for (var i=0; i < stars.length; i++){
+		stars[i].drawStar()
+		}
 
-}
+		drawJane();
 
-//if you click next button
-function changeScene(){
-	fill(0);
-	rect(0,0,1300,600);
+		textSize(30);
+		fill("white");
+		text("She had herself perfectly...", 50,150);
+		text("...packaged with a couple of...",860,310);
+		text("...labels to introduce...",80,400);
+		text("...herself to new people.",950,500);
 
-	}
+		//text bubble
+		if(mouseIsPressed){
+			fill(255);
+			ellipse(730,350,20,20);
+			ellipse(780,320,30,30);
+			ellipse(850,275,40,40);
+			ellipse(930,210,100,100);
+			ellipse(980,240,100,100);
+			ellipse(1050,235,100,100);
+			ellipse(920,150,100,100);
+			ellipse(970,120,100,100);
+			ellipse(1030,125,100,100);
+			ellipse(1070,180,100,100);
+			ellipse(1000,180,100,100);
+
+			textSize(20);
+			fill("#9FA2A4");
+			text("Hi I'm Jane!",940,130);
+			text("I'm from San Francisco",895,160);
+			text("and I moved to New",900,190);
+			text("York City to attend", 905,220);
+			text("NYU.",975,250);
+
+			}
+	}	
