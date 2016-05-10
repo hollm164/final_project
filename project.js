@@ -38,7 +38,6 @@ function star(x,y,c,diameter,diameter){
 function setup(){
 	createCanvas(1300,600);
 
-	scene = sceneOne();
 
 //create next button
 nextButton = createButton('NEXT');
@@ -55,6 +54,8 @@ nextButton.mousePressed(changeScene);
 	for (var i=0; i<300; i++){
 		stars.push (new star(random(0, windowWidth), random(0, windowHeight),"white",random(1,5), random(1,5)));
 	}
+
+sceneOne();
 
 }
 
@@ -144,22 +145,47 @@ function draw(){
 
 noStroke();
 
-scene;
+//text bubble
+if(sceneOne() && mouseIsPressed){
+	fill(255);
+	ellipse(730,350,20,20);
+	ellipse(780,320,30,30);
+	ellipse(850,275,40,40);
+	ellipse(930,210,100,100);
+	ellipse(980,240,100,100);
+	ellipse(1050,235,100,100);
+	ellipse(920,150,100,100);
+	ellipse(970,120,100,100);
+	ellipse(1030,125,100,100);
+	ellipse(1070,180,100,100);
+	ellipse(1000,180,100,100);
+
+	textSize(20);
+	fill("#9FA2A4");
+	text("Hi I'm Jane!",940,130);
+	text("I'm from San Francisco",895,160);
+	text("and I moved to New",900,190);
+	text("York City to attend", 905,220);
+	text("NYU.",975,250);
+
+	}
+
 
 }
 
 
 //if you click next button
 function changeScene(){
-		sceneOne() == sceneTwo();
-		mouseReleased();
+	if(mouseIsPressed){
+	sceneOne()= sceneTwo()}
 
 	}
-
 
 	//scene one
 	function sceneOne(){
 	background("#7DDCF3");
+
+	noStroke();
 
 	//skyline
 	for (var i=0; i < buildings.length; i++){
@@ -191,28 +217,5 @@ function changeScene(){
 		text("...labels to introduce...",80,400);
 		text("...herself to new people.",950,500);
 
-		//text bubble
-		if(mouseIsPressed){
-			fill(255);
-			ellipse(730,350,20,20);
-			ellipse(780,320,30,30);
-			ellipse(850,275,40,40);
-			ellipse(930,210,100,100);
-			ellipse(980,240,100,100);
-			ellipse(1050,235,100,100);
-			ellipse(920,150,100,100);
-			ellipse(970,120,100,100);
-			ellipse(1030,125,100,100);
-			ellipse(1070,180,100,100);
-			ellipse(1000,180,100,100);
 
-			textSize(20);
-			fill("#9FA2A4");
-			text("Hi I'm Jane!",940,130);
-			text("I'm from San Francisco",895,160);
-			text("and I moved to New",900,190);
-			text("York City to attend", 905,220);
-			text("NYU.",975,250);
-
-			}
-	}	
+	}
